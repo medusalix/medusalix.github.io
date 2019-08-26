@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Medusalix&#39; Blog</title>
+    <link>https://medusalix.github.io/</link>
+    <description>Recent content on Medusalix&#39; Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Powered by Hugo with Hello Friend theme</copyright>
+    <lastBuildDate>Mon, 26 Aug 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://medusalix.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Building a simple DMX Interface</title>
+      <link>https://medusalix.github.io/posts/dmx-interface/</link>
+      <pubDate>Mon, 26 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://medusalix.github.io/posts/dmx-interface/</guid>
+      <description>When I first joined the sound-and-lights team at my school, I was quite impressed by the amount of gear they had. While I enjoyed sitting in front of the mixing console and setting up all the microphones and speakers, it was always the lights which caught my attention. We had twelve theater lights mounted on two crossbars with different colored filters in front of them. All those lights were powered by a small 24 channel DMX controller.</description>
+    </item>
+    
+  </channel>
+</rss>

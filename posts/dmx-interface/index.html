@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>Building a simple DMX Interface :: Medusalix&#39; Blog</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="description" content="When I first joined the sound-and-lights team at my school, I was quite impressed by the amount of gear they had. While I enjoyed sitting in front of the mixing console and setting up all the microphones and speakers, it was always the lights which caught my attention. We had twelve theater lights mounted on two crossbars with different colored filters in front of them. All those lights were powered by a small 24 channel DMX controller."/>
+<meta name="keywords" content=""/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="https://medusalix.github.io/posts/dmx-interface/" />
+
+
+
+
+
+<link rel="stylesheet" href="https://medusalix.github.io/assets/style.css">
+
+
+<link rel="stylesheet" href="https://medusalix.github.io/style.css">
+
+
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://medusalix.github.io/img/apple-touch-icon-144-precomposed.png">
+<link rel="shortcut icon" href="https://medusalix.github.io/img/favicon.png">
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://medusalix.github.io/posts/dmx-interface/cover.jpg"/>
+<meta name="twitter:title" content="Building a simple DMX Interface"/>
+<meta name="twitter:description" content="When I first joined the sound-and-lights team at my school, I was quite impressed by the amount of gear they had. While I enjoyed sitting in front of the mixing console and setting up all the microphones and speakers, it was always the lights which caught my attention. We had twelve theater lights mounted on two crossbars with different colored filters in front of them. All those lights were powered by a small 24 channel DMX controller."/>
+
+
+
+<meta property="og:title" content="Building a simple DMX Interface" />
+<meta property="og:description" content="When I first joined the sound-and-lights team at my school, I was quite impressed by the amount of gear they had. While I enjoyed sitting in front of the mixing console and setting up all the microphones and speakers, it was always the lights which caught my attention. We had twelve theater lights mounted on two crossbars with different colored filters in front of them. All those lights were powered by a small 24 channel DMX controller." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://medusalix.github.io/posts/dmx-interface/" />
+<meta property="article:published_time" content="2019-08-26T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-08-26T00:00:00+00:00" /><meta property="og:site_name" content="Medusalix&#39; Blog" />
+
+
+
+
+
+
+  </head>
+  <body class="dark-theme">
+    <div class="container">
+      <header class="header">
+  <span class="header__inner">
+    <a href="https://medusalix.github.io/" class="logo" style="text-decoration: none;">
+  
+    <span class="logo__mark"><svg xmlns="http://www.w3.org/2000/svg" class="greater-icon" viewBox="0 0 44 44">
+  <path fill="none" d="M15 8l14.729 14.382L15 35.367"/>
+</svg>
+</span>
+    <span class="logo__text">Medusalix&#39; blog</span>
+    <span class="logo__cursor"></span>
+  
+</a>
+
+    <span class="header__right">
+      
+        <nav class="menu">
+  <ul class="menu__inner menu__inner--desktop">
+    
+      
+        
+          <li><a href="/about">About</a></li>
+        
+      
+    
+  </ul>
+
+  <ul class="menu__inner menu__inner--mobile">
+    
+      
+        <li><a href="/about">About</a></li>
+      
+    
+  </ul>
+</nav>
+
+        <span class="menu-trigger">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+          </svg>
+        </span>
+      
+      <span class="theme-toggle">
+        <svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+
+      </span>
+    </span>
+  </span>
+</header>
+
+
+      <div class="content">
+        
+  <div class="post">
+    <h2 class="post-title"><a href="https://medusalix.github.io/posts/dmx-interface/">Building a simple DMX Interface</a></h2>
+    <div class="post-meta">
+      
+        <span class="post-date">
+            2019-08-26
+        </span>
+      
+      
+      
+        <span class="post-read-time">— 4 min read</span>
+      
+    </div>
+
+    
+
+    
+      
+        <img src="https://medusalix.github.io/posts/dmx-interface/cover.jpg" class="post-cover" />
+      
+    
+
+    <div class="post-content">
+      
+
+<p>When I first joined the sound-and-lights team at my school, I was quite impressed by the amount of gear they had.
+While I enjoyed sitting in front of the mixing console and setting up all the microphones and speakers, it was always the lights which caught my attention.
+We had twelve theater lights mounted on two crossbars with different colored filters in front of them. All those lights were powered by a small 24 channel DMX controller. Due to the powerful lamps we used (up to 1000 watts), turning on the lights regularly tripped the breaker. That&rsquo;s why we had to use two separate 16 amp phases only to power the lights and a single one for the amplifiers (which also helped with the noise induced by the DMX light dimmers).
+I was always interested in computer-controlled stuff, so the natural thing for me was to look up how to control these lights with a PC. When I read about DMX interfaces and how they essentially only consist of a <em>USB-to-UART</em> and a <em>RS485 driver</em>, I knew what my next project would look like.</p>
+
+<hr />
+
+<h2 id="how-it-works">How it works</h2>
+
+<p>The basic principle of a DMX interface is pretty simple. Your PC sends out raw DMX frames over the USB interface, which are turned into serial data by a <em>USB to UART chip</em>. That data is passed onto a <em>RS485 driver</em> that outputs differential signals. The DMX devices receive the signals with another <em>RS485 transceiver</em> and their microcontroller uses the serial data to turn the lights on and off. The differential signaling used by RS485 helps to reduce interference caused by noise and other cables running next to your DMX line.</p>
+
+<p>I added some additional protection to prevent the USB ports from being fried by plugging in a faulty DMX device into your interface (some dodgy Chinese fog machines use XLR for their power supply, possibly putting mains voltage on your DMX bus). The necessary isolation is done using a <em>DC-to-DC converter</em> and an <em>optocoupler</em> for the data line.</p>
+
+
+  <figure class="left" >
+    <img src="components.jpg"   style="border-radius: 8px;"  />
+    
+      <figcaption class="center" >The main components of the circuit</figcaption>
+    
+  </figure>
+
+
+
+<hr />
+
+<h2 id="first-prototype">First prototype</h2>
+
+<p>The first experiments were done on a <em>breadboard</em>, but I quickly moved to more permanent <strong>prototype boards</strong>. I decided to integrate two independent DMX outputs to support more flexible routing options (like sitting in the middle of two DMX lights) and for an increased fail-safety. For the <em>USB to UART</em> conversion I chose a simple <em>FT232</em> breakout board to help with soldering.</p>
+
+
+  <figure class="left" >
+    <img src="board.jpg"   style="border-radius: 8px;"  />
+    
+      <figcaption class="center" >Most of the components placed on the board</figcaption>
+    
+  </figure>
+
+
+
+<p>I like to do the connections between parts with very thin wires. The insulation burns off when touched with a soldering iron, making the soldering very easy and quick.
+I built many devices that way and the wiring has proven to be very reliable.</p>
+
+
+  <figure class="left" >
+    <img src="wiring.jpg"   style="border-radius: 8px;"  />
+    
+      <figcaption class="center" >Lots of ultra thin wires on the backside</figcaption>
+    
+  </figure>
+
+
+
+<p>I used the following <strong>parts</strong> for this build:</p>
+
+<ul>
+<li>Maxim MAX485 (line driver)</li>
+<li>Vishay 6N137 (optocoupler)</li>
+<li>Mornsun B0505S-1W (DC-DC converter)</li>
+<li>FTDI FT232 (USB-UART converter)</li>
+<li>120Ω DMX termination resistor</li>
+<li>Current limiting resistor for the optocoupler</li>
+<li>Two capacitors for the DC-DC converter</li>
+</ul>
+
+<p>All of the components are very cheap and readily available from Ebay or Aliexpress. The whole cost of this project was around 10-15€ (the most expensive part being the enclosure).</p>
+
+<hr />
+
+<h2 id="final-build">Final build</h2>
+
+<p>The assembled board was placed into a nice plastic enclosure, with two <em>XLR jacks</em> on one side and a <em>USB type B connector</em> on the other. Whether you choose good-quality <a href="https://www.neutrik.com/en/neutrik/products/xlr-connectors/xlr-chassis-connectors">Neutrik</a> XLR sockets or some no-name Chinese ones is up to you. The USB jack was soldered to some copper angle brackets and screwed into the side. A simple <em>mini USB cable</em> with one end cut off was used to connect to the UART board.</p>
+
+
+  <figure class="left" >
+    <img src="build.jpg"   style="border-radius: 8px;"  />
+    
+      <figcaption class="center" >The final board in its enclosure (one DC-DC converter is still missing)</figcaption>
+    
+  </figure>
+
+
+
+<p>The interface can be used with a whole range of software, such as <a href="https://www.dmxcontrol.de/en/"><strong>DMXControl</strong></a> or <a href="https://lightkeyapp.com/en/"><strong>Lightkey</strong></a>. The performance of the interface is limited by the power of your computer, because no internal buffering is done (this would require a microcontroller). Though any PC built in the last ten years should work just fine. I never had problems with dropouts or lights misbehaving.</p>
+
+<p>The project was very fun to plan and build and enabled us to program some fancy light-effects and transitions. A few months later, the school decided to buy new LED lamps and a better lighting desk. Quite unfortunately, I didn&rsquo;t have a chance to try out their new RGB lights with my interface because I already left school a few weeks after.</p>
+
+
+  <figure class="left" >
+    <img src="demo.jpg"   style="border-radius: 8px;"  />
+    
+      <figcaption class="center" >Party for the younger students, controlled using Lightkey</figcaption>
+    
+  </figure>
+
+
+
+<p>If you have any <strong>questions</strong>, feel free to use the <strong>comments</strong> below.</p>
+
+    </div>
+    
+
+    
+
+    </div>
+
+      </div>
+
+      
+        <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright copyright--user">Powered by Hugo with Hello Friend theme</div>
+    
+  </div>
+</footer>
+
+<script src="https://medusalix.github.io/assets/main.js"></script>
+<script src="https://medusalix.github.io/assets/prism.js"></script>
+
+
+      
+    </div>
+
+    
+  </body>
+</html>
